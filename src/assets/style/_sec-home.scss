@@ -1,0 +1,51 @@
+
+.sec-home {
+    display:flex;
+    padding: 3.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+
+    .home-info {
+        margin-top: 4rem;
+        .info-text {
+            font-size: 0.9rem;
+        }
+        .home-title {
+            width: 20rem;
+            font-size: 3rem;
+        }
+        .home-description {
+            width:19rem;
+            font-size: 1.1rem;
+        }
+    }
+
+    .home-img {
+
+        img {
+            max-width: 25rem;
+        }
+    }
+}
+
+@media (max-width: 575.98px) { 
+
+    .sec-home {
+        height: 60vh;
+        .home-info {
+            .info-text {
+                font-size: 0.7rem;
+            }
+            .home-title {
+                width: 18rem;
+                font-size: 2rem;
+            }
+            .home-description {
+                width:17rem;
+                font-size: 1rem;
+            }
+        }
+    }
+}
