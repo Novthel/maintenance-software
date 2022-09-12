@@ -1,16 +1,20 @@
+$text-color-nav: azure;
 
 .sec-nav {
-  
-    display: flex;
     justify-content: space-between;
+    display: flex;
     align-items: center;
     background-color: black;
-    color: azure;
+    color: $text-color-nav;
     height: 4rem;
+    z-index: 1;
 
     h2 {
-        font-size: 1.5rem;
-        margin-left: 2rem;
+        font-size: 1.8rem;
+        font-weight: 400;
+        padding-left: 4rem;
+        margin: 0;
+        text-shadow: 2px 4px 5px #6c63ff;
     }
 
     .menu-projects{
@@ -24,9 +28,25 @@
         transition: left 0.3s;
     
         li{
-            font-size: 1rem;   
-            text-decoration: none;   
+            .link-project{
+                text-decoration: none;       
+                .link-icon {
+                    display: none;
+                    color: $text-color-nav;
+                } 
+                .text-link {
+                    font-size: 0.8rem; 
+                    color: $text-color-nav;
+                    &:hover {
+                        text-shadow: 2px 4px 5px #6c63ff;
+                        font-weight: 400;
+                        font-size: 1.2rem;
+                    }
+                    
+                }
+            }   
         }
+      
     }
 
     .hamb{
@@ -34,37 +54,57 @@
     }
 
     .show {
-        left: 0;
+        left: 41%;
     }
 
 }
 
-@media (max-width: 650px) { 
+@media (max-width: 767.98px) { 
 
     .sec-nav {
         position: fixed;
+        justify-content: space-between;
         h2 {
-            font-size: 1rem;
-            margin-left: 0.9rem;
+            font-size: 1.3rem;
+            margin: 0;
+            padding-left: 1rem;
         }
     
         .menu-projects{
             flex-direction: column;
             position: fixed;
             top: 4rem;
+            gap: 0.5rem;
             background-color: rgb(44, 42, 42);
-            width: 100%;
+            width: 60%;
             min-height: calc(100% - 4rem);
             padding: 3rem 0;
         
-            li{
-                text-align: center;
-                font-size: 1.7rem;  
+            li {
+                .link-project{
+                    padding: 0 2rem;
+                    text-decoration: none;
+                    &:hover {
+                        text-shadow: 2px 4px 5px #6c63ff;
+                    }
+                    .link-icon {
+                        display: inline;
+                        font-size: 1.3rem; 
+                        padding: 0 0.5rem;
+                      
+                    } 
+                    .text-link {
+                        font-size: 1rem; 
+                        &:hover {
+                            font-size: 1.2rem;
+                        }
+                    }
+                } 
             }
         }
-
+ 
         .hamb{
-            font-size: 2.2rem;
+            font-size: 2.1rem;
             background: none;
             color: white;
             border: none;
