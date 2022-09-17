@@ -54,7 +54,7 @@ const FormProject = () => {
 
         if(params.id){
             dispatch(updateProject({
-                ...project,
+                ...project, project,
                 id: params.id
             }))
             navigate('/projects')
@@ -75,58 +75,73 @@ const FormProject = () => {
         if(params.id){  
             setNameProject(proj.nameProject)
             setProjectDescription(proj.projectDescription)
+            setListTask(proj.listTask)
         } 
          
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params.id]);
-
+    
 
     return (
         <div className='container-form'>
-            <div className='col-10 col-sm-7 col-md-6 col-xl-4'>
-                <form onSubmit={ handleSubmit } className='form-projects m-2'>
-                    <legend className='text-center mb-3'>Create projects</legend>
-                    <div className='mb-2'>
-                        <label htmlFor='nameProject' className =" col-form-label-sm">Title Project</label>
-                        <input name='nameProject' className="form-control form-control-sm"  type='text' placeholder='New Project' id='nameProject' 
-                        value= { project.nameProject } aria-describedby="nameHelpProject" onChange={ (e) => setNameProject(e.target.value )} />
+            <div className='col-10 col-sm-7 col-md-6 col-lg-4'>
+                <form onSubmit={ handleSubmit } className='form-projects'>
+                    <legend>{ params.id ? 'Edit Project' : 'Create Project'}</legend>
+
+                    <div className="form-floating mb-3 py-1">
+                        <input type="text" className="form-control" id="floatingInput" name='nameProject' placeholder="Title project"
+                             value= { project.nameProject } onChange={ (e) => setNameProject(e.target.value )} required />
+                        <label htmlFor="floatingInput">Title</label>
                     </div>
-                    <div className='mb-2'>
-                        <label htmlFor='projectDescription' className ="col-form-label-sm">Description</label>
-                        <textarea id='projectDescription'  className="form-control form-control-sm" name='projectDescription' placeholder='description' 
-                        onChange={ (e) => setProjectDescription(e.target.value) }  
-                        value={ projectDescription }/>   
+                    <div className="form-floating mb-3 py-1">
+                        <textarea type="text" name='projectDescription' className="form-control" id="floatingDescription" placeholder="Description"
+                            onChange={ (e) => setProjectDescription(e.target.value) } value={ projectDescription } required />
+                        <label htmlFor="floatingDescription">Description</label>
                     </div>
                  
-                    { 
-                        !params.id ?
-                        (   <>
-                                <div className='mb-2'>
-                                    <div id="title" className="form-text">Add the new tasks to your project.</div>
-                                    <hr></hr>
-                                    <label htmlFor='title' className =" col-form-label-sm">Title Task</label>
-                                    <input id='title' name='title' className="form-control form-control-sm" placeholder='task' onChange={ handleTaskChange } value={ task.title }/>
-                                </div>
-                                <div className='mb-2'>
-                                    <label htmlFor='description' className =" col-form-label-sm">Description</label>
-                                    <textarea id='description'  className="form-control form-control-sm" name='description' placeholder='description' onChange={ handleTaskChange }  value={ task.description }/>
-                                </div>
-                                <div className="row mb-1">
-                                    <button className=" btn btn-outline-primary btn-sm col-5 col-sm-4 col-md-3 m-2" onClick={ SubmitTask }>Add Task</button> 
-                                </div>
-                            </>
-                        )
-                        :
-                        null
-                    }
-                   
+                    <div className='modal-newTask'>
+                        <div className="form-text">Add a new maintenance routine to your project</div>
+                        <button type="button" className=" btn-newtask btn btn-outline-secondary btn-sm rounded-circle" data-bs-toggle="modal" data-bs-target="#form-Modal">
+                            +
+                        </button>
+                    </div>   
+
                     <div className="row">
-                        <button type="submit" className="btn btn-primary btn-sm col-8 m-auto">{ params.id ? 'Edit Project' : 'Create Project'}</button>   
-                    </div>
-                        
+                        <button type="submit" className="btn btn-outline-light btn-sm col-8 m-auto">{ params.id ? 'Edit' : 'Create'}</button>   
+                    </div>                      
                 </form>
             </div>
+
+            {/*--------- modal -------- */}
+
+            <div className="modal fade" id="form-Modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content form-projects">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">New Maintenance Routine</h5>
+                        </div>
+                        <div className="modal-body ">
+
+                            <div className="form-floating mb-3 py-1">
+                                <input type="text" className="form-control form-control-sm" id="floatingInput-Modal" name='title' placeholder='task' onChange={ handleTaskChange } value={ task.title } />
+                                <label htmlFor="floatingInput-Modal" className =" col-form-label-sm">Title</label>
+                            </div>
+                            <div className="form-floating mb-3 py-1">
+                                <textarea type="text" name='description' className="form-control form-control-sm" id="floatingDescription-Modal" placeholder="description"
+                                    onChange={ handleTaskChange }  value={ task.description } />
+                                <label htmlFor="floatingDescription-Modal" className =" col-form-label-sm" >Description</label>
+                            </div>
+                        </div>
+
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary btn-sm" onClick={ SubmitTask } data-bs-dismiss="modal">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
+          
         </div>
         
     );

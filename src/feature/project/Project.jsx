@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams, Link } from 'react-router-dom';
 import Task from './Task';   
-import { useDispatch } from 'react-redux';
 import { deleteTask, toggleTask } from './ProjectSlice';
+import noData from '../../assets/img/search_files.svg';
 
 
 const Project = () => {
 
-    const [project, setProject ] = useState({})
-    const stateProjects = useSelector( state => state.projects )
+    const [project, setProject ] = useState({})  
     const params = useParams();
     const projectID = params.id
-
+    const proj = useSelector( state => state.projects.find(proj => proj.id === Number(params.id)))
     const dispatch = useDispatch()
 
     const removeTask = (id)=> {
@@ -32,32 +31,44 @@ const Project = () => {
     useEffect(() => {
 
         if(params.id){    
-           const projectFound = stateProjects.find((project) => project.id === Number(params.id))
            setProject({
-            ...project, ...projectFound
+            ...project, ...proj
            })
         }
    
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [params.id, stateProjects]);
+    }, [params.id]);
 
+
+    if(!project.listTask){
+        return null
+    }
 
     return (
-        <div>
-            {
-                project.listTask? 
-                    <div className='container pt-5'>
-                        <div className=' row text-center'>
-                            <h1 >Project: { project.nameProject }</h1>
-                        </div>
-                        { project.listTask.map((task, index)=> (
-                        <Task key={ index } {...task } remove={ removeTask } toggle={ toggle } />
-                        ))}     
-                    </div>
-                :
-                <h3>There are no routines in this project.</h3>
-            }
-        </div>
+        <>
+            <div className='container py-4'>
+                <div className='row list-project'>
+                    <Link to='/projects' className=' row text-center link-title'>
+                        <h1 ><i className="bi bi-check2-circle"></i> { project.nameProject }</h1>
+                    </Link>
+                    { 
+                        project.listTask.length !== 0 ?
+                        ( project.listTask.map((task, index)=> (
+                        <Task key={ task.id } {...task } remove={ removeTask } toggle={ toggle }
+                        projectID ={ projectID } />
+                        )))
+                        :
+                        (
+                            <div className='no-Data'>
+                                <img className='img-no-Data' src={ noData } alt='No data' />
+                                <h3>There are no routines in this project.</h3>
+                            </div>
+                        )  
+                    }
+                </div>     
+            </div>
+              
+        </>
     );
 };
 

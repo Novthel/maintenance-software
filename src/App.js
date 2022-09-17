@@ -5,7 +5,7 @@ import Project from "./feature/project/Project";
 import Home from "./pages/Home";
 import Header from './components/container/Header';
 import TaskForm from "./feature/project/TaskForm";
-
+import './App.scss'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
             <Route path="/projects" element={ <ProjectList /> } /> 
             <Route path="/project/:id" element={ <Project /> } /> 
             <Route path="/editProject/:id" element={ <FormProject /> } />  
-            <Route path="/editTask/:id" element={ <TaskForm /> } />  
+            <Route path="/editTask/:data" element={ <TaskForm /> } />  
           </Routes>
      </BrowserRouter>
   );
