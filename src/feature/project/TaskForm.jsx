@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,6 +11,9 @@ const TaskForm = () => {
     const dispatch = useDispatch();
     const stateProject = useSelector( state => state.projects );
     const params = useParams();
+    
+    var data = JSON.parse(params.data);
+
     const [task, setTask] = useState({
         title : '',
         description:'',
@@ -27,46 +31,48 @@ const TaskForm = () => {
 
     const handleSubmit = (e)=> {
         e.preventDefault()
-   
-        if(params.id){   
-            dispatch(updateTask(task))
+            dispatch(updateTask({
+                task,
+                projectID: data.projectID
+            }))
             navigate(-1)
-        }else{
-
-        }
     };
 
     useEffect(() => {
-        if(params.id){ 
-            let lists = []
-            stateProject.forEach(element => {
-                lists = element.listTask
-                
-            });
-            const task = lists.find((list) => list.id === Number(params.id))
-            setTask(task)
-        };
-    }, [params.id, stateProject]);
+
+        if(data) {
+            const { id, projectID } = data;
+            const projectFound = stateProject.find((project) => project.id === Number(projectID) );
+            const { listTask } = projectFound;
+            const taskFound = listTask.find((list) => list.id === id );
+            setTask(taskFound)
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
     return (
 
         <div className='container-form '>
             <div className='col-10 col-sm-7 col-md-6 col-xl-4'>
+              
                 <form onSubmit={ handleSubmit } className='form-projects m-2'>
-                    <legend className='text-center mb-3'>Edit Task</legend>
-                    <div className='mb-2'>
-                        <label htmlFor='title' className =" col-form-label-sm">Title</label>
-                        <input id='title'  className="form-control form-control-sm"  name='title' placeholder='task' onChange={ handleChange } value={ task.title }/>
+                    <legend className='text-center mb-2'>Edit Task</legend>
+                    <div className="form-floating mb-3 py-1">
+                        <input type="text" className="form-control form-control-sm" id="title" name='title' 
+                        value={ task.title } placeholder='task' onChange={ handleChange } />
+                        <label htmlFor="title" className =" col-form-label-sm">Title</label>
                     </div>
-                    <div className='mb-2'>
-                        <label htmlFor='description' className ="col-form-label-sm">Description</label>
-                        <textarea id='description' className="form-control form-control-sm" name='description' placeholder='description' onChange={ handleChange }  value={ task.description }/>
+                    <div className="form-floating mb-3 py-1">
+                        <textarea type="text" name='description' className="form-control form-control-sm" id="description"
+                        value={ task.description }  placeholder="description" onChange={ handleChange }   />
+                        <label htmlFor="description" className =" col-form-label-sm" >Description</label>
                     </div>
-                    <button type='submit' className="btn btn-primary btn-sm col-3 ">Edit </button>    
-                </form>
+                    <button type='submit' className="btn btn-primary btn-sm col-3">Edit </button>    
+                </form>   
             </div>
         </div>
+        
     );
 }
 

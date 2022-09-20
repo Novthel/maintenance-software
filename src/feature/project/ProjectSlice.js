@@ -13,11 +13,12 @@ export const ProjectSlice = createSlice({
             state.splice(state.indexOf(projectFound),1)
         },
         updateProject: (state, action) => {
-            const { nameProject, projectDescription, id } = action.payload
+            const { nameProject, projectDescription, id, listTask } = action.payload
             const projectFound = state.find((project) => project.id === Number(id) )
             if(projectFound){
                 projectFound.nameProject = nameProject;
                 projectFound.projectDescription = projectDescription;  
+                projectFound.listTask = listTask;
             }
         },
         deleteTask: (state,action) => {
@@ -38,18 +39,19 @@ export const ProjectSlice = createSlice({
         },
         updateTask: (state, action) => {
 
-            const { id, description, title } = action.payload
-            let lists = []
-            state.forEach(element => {
-                lists = element.listTask   
-            });
+            const { projectID, task } = action.payload;
 
-            const task = lists.find((list) => list.id === Number(action.payload.id))
-            if(task){
-                task.id = id;
-                task.description = description;
-                task.title = title;
+            const projectFound = state.find((project) => project.id === Number(projectID));
+            if(projectFound) {
+                const {listTask} = projectFound;
+                const taskFound = listTask.find((list) => list.id === task.id);
+                if(taskFound){
+                    taskFound.id = task.id;
+                    taskFound.description = task.description;
+                    taskFound.title = task.title;
+                }
             }
+
         },
         toggleTask: (state, action) => {
             const { projectID, taskID } = action.payload
