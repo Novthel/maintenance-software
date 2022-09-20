@@ -4,7 +4,7 @@ import Principal from '../components/pure/Principal';
 
 const Home = () => {
     return (
-        <div className='container-xxl'>
+        <div className='container-xxl p-0'>
             <div>
                 <Principal />
             </div>

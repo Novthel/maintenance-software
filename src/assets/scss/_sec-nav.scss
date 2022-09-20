@@ -20,7 +20,6 @@
     .menu-projects{
         @include flex(flex-start, center);
         list-style: none;
-        gap: 1rem;
         padding-right: 4rem;
         margin-bottom: 0;
         left: 100%;
@@ -36,13 +35,13 @@
                 .text-link {
                     font-size: 0.8rem; 
                     color: $text-color-nav;
-                    &:hover {
-                        text-shadow: $text-shadow;
-                        font-weight: 400;
-                        font-size: 1.2rem;
-                        transition: font-size 0.3s ease-in-out;
+                    padding: 0.5rem;
+                    &:hover{
+                        padding: 0.4rem;
+                        border-radius: 1rem;
+                        border: 0.1rem solid $color-main;
+                        color: $color-main;
                     }
-                    
                 }
             }   
         }
@@ -97,6 +96,13 @@
                         font-size: 1rem; 
                         &:hover {
                             font-size: 1.1rem;
+                            padding: 0.4rem;
+                            border-radius: none;
+                            border: none;
+                            color: $color-main;
+                        }
+                        &:active {
+                            color: $color-main; 
                         }
                     }
                 } 

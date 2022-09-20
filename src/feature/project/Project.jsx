@@ -35,13 +35,13 @@ const Project = () => {
             ...project, ...proj
            })
         }
-   
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [params.id]);
+    }, [params.id, proj ]);
 
 
     if(!project.listTask){
-        return null
+        return <h6 className='mens-null'>There are no routines in this project.</h6>
     }
 
     return (

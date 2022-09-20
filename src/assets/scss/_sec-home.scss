@@ -5,9 +5,13 @@
     @include flex(center, center);
     padding: 3.5rem;
     gap: 2rem;
+    height: 100vh;
+    background-color: white;
+    color: $color-text-home;
 
     .home-info {
-        margin-top: 4rem;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
         .info-text {
             font-size: 0.9rem;
             color: $color-main;
@@ -30,11 +34,12 @@
     }
 }
 
-@media (max-width: 575.98px) { 
-
+@media (max-width: 768px) { 
     .sec-home {
-        height: 60vh;
+        @include background-project();
+        color: $color-text;
         .home-info {
+            margin-top: 5rem;
             .info-text {
                 font-size: 0.7rem;
             }
@@ -48,4 +53,13 @@
             }
         }
     }
+
 }
+
+@media (max-width: 575.98px) { 
+
+    .sec-home {
+        height: 60vh;
+    }
+}
+

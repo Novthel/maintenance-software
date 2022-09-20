@@ -1,5 +1,6 @@
 import React from 'react';
-import imgPrincipal from '../../assets/img/completed.svg'
+import portatil from '../../assets/img/portatil.svg'
+
 
 const Principal = () => {
     return (
@@ -15,10 +16,17 @@ const Principal = () => {
                     </p>
                 </div>
                 <div className='home-img d-none d-md-block'>
-                    <img src={ imgPrincipal } alt='foto' />
+                    <img src={ portatil } alt='foto' />
                 </div>  
             </section>
             <section className='sec-details'>
+                        <div className='details-info'>
+                            <h2 className='details-title'>Organize maintenance requests</h2>
+                            <p className='details-description'>
+                                Easily track the progress of maintenance requests using the projects view. Use the maintenance routines list to organize and plan activities.
+                                Your team will love using this task visualization interface to organize their daily tasks.
+                            </p>
+                        </div>
             </section>
         </>
        

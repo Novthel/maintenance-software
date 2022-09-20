@@ -3,6 +3,7 @@
 @use "./assets/scss/mixin" as *;
 @use "./assets/scss/sec-nav";
 @use "./assets/scss/sec-home";
+@use "./assets/scss/sec-details";
 @use "./assets/scss/sec-footer";
 @use "./assets/scss/sec-projectList";
 @use "./assets/scss/container-form";
@@ -13,10 +14,8 @@ body {
     padding: 0;
     color: $color-text;
     box-sizing: border-box;
-    background: #485563;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
+    @include background-project();
+
 }
 
 .sec-nav {
@@ -24,6 +23,10 @@ body {
 }
 
 .sec-home {
+    @include section-base();
+}
+
+.sec-details {
     @include section-base();
 }
 
