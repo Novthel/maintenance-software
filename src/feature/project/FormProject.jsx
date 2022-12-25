@@ -107,7 +107,7 @@ const FormProject = () => {
                     </div>   
 
                     <div className="row">
-                        <button type="submit" className="btn btn-outline-light btn-sm col-8 m-auto">{ params.id ? 'Edit' : 'Create'}</button>   
+                        <button type="submit" className="btn btn-outline-light btn-sm col-8 m-auto">{ params.id ? 'Save' : 'Create'}</button>   
                     </div>                      
                 </form>
             </div>

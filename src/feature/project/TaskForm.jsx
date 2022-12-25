@@ -68,7 +68,7 @@ const TaskForm = () => {
                         value={ task.description }  placeholder="description" onChange={ handleChange }   />
                         <label htmlFor="description" className =" col-form-label-sm" >Description</label>
                     </div>
-                    <button type='submit' className="btn btn-primary btn-sm col-3">Edit </button>    
+                    <button type='submit' className="btn btn-primary btn-sm col-3">Save </button>    
                 </form>   
             </div>
         </div>
